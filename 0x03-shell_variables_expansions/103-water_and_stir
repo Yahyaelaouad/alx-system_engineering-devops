@@ -1,2 +1,10 @@
 #!/bin/bash
-printf '%o\n' $(( 5#$( echo $WATER | tr water 01234) + 5#$( echo $STIR | tr stirr. 01234 ) )) | tr 01234567 bestchol
+water_dec=$(echo "ibase=water; $WATER" | bc)
+stir_dec=$(echo "ibase=stir; $STIR" | bc)
+
+sum_dec=$(($water_dec + $stir_dec))
+
+BESTCHOL=$(echo "obase=bestchol; $sum_dec" | bc)
+
+echo "The sum of WATER and STIR is: $BESTCHOL"
+
